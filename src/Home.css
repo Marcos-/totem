@@ -1,0 +1,383 @@
+:root{
+  --BrasalRed: #ff5757;
+  --Darkgray: #414042;
+  --Lightgray: #e6e7e8;
+}
+
+.App {
+  text-align: center;
+}
+
+
+@media (prefers-reduced-motion: no-preference) {
+  .GetCpf {
+    animation: touch-glow 1s;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .GetOpcoes {
+    animation: touch-glow 1s;
+  }
+}
+
+.App-header {
+  background-color: #fff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.label{
+  color: var(--Lightgray);
+}
+
+@keyframes touch-glow {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+nav {
+  background-color: var(--Darkgray);
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  /* background-color: var(--Darkgray); */
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #111;
+}
+
+.active {
+  background-color: #4CAF50;
+}
+
+.cpf {
+  border: 1px solid var(--Lightgray);
+    border-radius: 50px;
+    font-size: 46px;
+    padding: 16px;
+    color: var(--Darkgray);
+}
+
+.km {
+  border: 1px solid var(--Lightgray);
+    border-left: 0px;
+    border-right: 0px;
+    border-top: 0px;
+    font-size: 46px;
+    padding: 16px;
+    color: var(--Darkgray);
+    width: 190px;
+}
+
+.icone {
+  width: 64px;
+  filter: invert(200%);
+  margin-bottom: 16px;
+}
+
+.botao{
+  height: 64px;
+    width: 128px;
+    color: #ff5f6d;
+    font-weight: 300;
+    font-family: roboto;
+    font-size: 1.3rem;
+    background: none;
+    border: 1px solid #ff5f6d;
+    border-radius: 50px;
+    margin-top: 64px
+}
+
+@import url(https://fonts.googleapis.com/css?family=Arvo);
+
+    .box{
+      margin: 0px auto;
+          margin-top: 80px;
+          color: #333;
+          text-transform: uppercase;
+          padding: 8px;
+          width: 300px;
+          font-weight: bold;
+          text-shadow: 0px 1px 0px #fff;
+          font-family: "arvo";
+          font-size: 11px;
+          border: 1px solid;
+    }
+
+    .box ul {
+      display: grid;
+    }
+
+    .box li {
+      text-align: right;
+    }
+
+    .note {
+      color: var(--Darkgray);
+      margin-top: 32px;
+    }
+
+  .inner{
+        /* border: 2px dashed rgba(51, 51, 51, 0.5); */
+        min-height:100px;
+        padding:8px;
+
+    }
+    .inner h1{
+        padding:5px 0px;
+        margin:0px;
+        font-size:18px;
+        border-bottom: 1px solid rgba(51, 51, 51, 0.3);
+        text-align:center;
+    }
+    .info{
+        width:100%;
+        margin-top:5px;
+    }
+    .info .wp{
+        float: left;
+        padding: 5px;
+        width: 83px;
+        text-align: center;
+    }
+    .info .wp h2{
+        margin: 8px;
+    }
+    .total{
+        border-top: 1px solid rgba(51, 51, 51, 0.3);
+    }
+
+    .clearfix:after {
+        content: ".";
+        display: block;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+    }
+    .total h2{
+        padding-left:115px;
+        margin:10px 0px;
+        font-size: 15px;
+    }
+    .total p{float:right;margin:0px;margin-right: 15px;}
+
+    a.buy{
+        color:#fff;
+        text-align:center;
+        font-size:25px;
+        text-decoration:none;
+        display:block;
+        width:200px;
+        margin:0px auto;
+        margin-top:50px;
+        padding:5px;
+        background:rgba(0,0,0,0.5);
+    }
+
+
+label.option:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+label.option:visited {
+    background: #00000026;
+}
+
+/* .on-checked {
+  background-color: rgba(0, 0, 0, 0.1);
+} */
+
+.options * {
+  padding: 0px;
+  margin: 0px;
+}
+
+.options h1 {
+  font-size: 6em;
+  font-weight: 700 !important;
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.02), 2px 2px rgba(0, 0, 0, 0.02), 3px 3px rgba(0, 0, 0, 0.02), 4px 4px rgba(0, 0, 0, 0.02), 0.125rem 0.125rem rgba(0, 0, 0, 0.02), 6px 6px rgba(0, 0, 0, 0.02), 7px 7px rgba(0, 0, 0, 0.02), 8px 8px rgba(0, 0, 0, 0.02), 9px 9px rgba(0, 0, 0, 0.02), 0.3125rem 0.3125rem rgba(0, 0, 0, 0.02), 11px 11px rgba(0, 0, 0, 0.02), 12px 12px rgba(0, 0, 0, 0.02), 13px 13px rgba(0, 0, 0, 0.02), 14px 14px rgba(0, 0, 0, 0.02), 0.625rem 0.625rem rgba(0, 0, 0, 0.02), 16px 16px rgba(0, 0, 0, 0.02), 17px 17px rgba(0, 0, 0, 0.02), 18px 18px rgba(0, 0, 0, 0.02), 19px 19px rgba(0, 0, 0, 0.02), 1.25rem 1.25rem rgba(0, 0, 0, 0.02);
+}
+
+.options h4,
+.options h5 {
+  margin-top: 1em;
+  letter-spacing: 3px;
+}
+
+.options h1,
+.options h2,
+.options h3,
+.options h4,
+.options h5,
+.options h6 {
+  line-height: 100%;
+  font-weight: normal;
+}
+
+.options p {
+  font-size: 0.875em;
+  margin-bottom: 1em;
+  line-height: 160%;
+}
+
+#toggle-alert {
+  position: fixed;
+  z-index: 1000;
+  right: 1.5em;
+  top: 1.5em;
+  display: block;
+  border: 1px solid #fff;
+  padding: 1em 1.8em;
+  font-size: 0.6125em;
+  border-radius: 100em;
+  cursor: pointer;
+  transition: .3s ease-out all;
+}
+#toggle-alert i {
+  margin-right: 0.7em;
+  line-height: 100%;
+  opacity: .7;
+  font-size: 1rem;
+}
+#toggle-alert:hover {
+  border-color: #ffc371;
+  color: #ffc371;
+}
+
+.options ul {
+  display: grid;
+  margin-top: 16px
+}
+
+.options a{
+  color: white;
+    text-decoration: none;
+    position: relative;
+    top: 2rem;
+}
+
+.options li {
+  font-size: large;
+  font-weight: 100;
+}
+
+.options {
+  display: table;
+  border-collapse: collapse;
+  width: 99.9999%;
+  height: 400px;
+  table-layout: fixed;
+  background: linear-gradient(135deg, #ff5f6d 20%, #ffc371 80%);
+  box-shadow: 15px -10px 10px var(--Lightgray);
+}
+
+.carros {
+  display: table;
+  border-collapse: collapse;
+  width: 99.9999%;
+  height: 400px;
+  table-layout: fixed;
+  background: none;
+  box-shadow: none;
+  color: var(--Darkgray);
+}
+
+.options > .option {
+  position: relative;
+  overflow: hidden;
+  display: table-cell;
+  vertical-align: middle;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+  transition-property: background;
+  transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+  transition-duration: .3s;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+.options > .option > input[type="radio"],
+.options > .option > input[type="checkbox"] {
+  position: absolute;
+  display: none;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.options > .option > input[type="radio"]:hover, .options > .option > input[type="radio"]:checked,
+.options > .option > input[type="checkbox"]:hover,
+.options > .option > input[type="checkbox"]:checked {
+  cursor: pointer !important;
+}
+.options > .option > input[type="radio"]:hover ~ .option-content, .options > .option > input[type="radio"]:checked ~ .option-content,
+.options > .option > input[type="checkbox"]:hover ~ .option-content,
+.options > .option > input[type="checkbox"]:checked ~ .option-content {
+  width: 100%;
+  -webkit-transform: scale(1.3, 1.3);
+          transform: scale(1.3, 1.3);
+}
+.options > .option > input[type="radio"]:checked ~ .on-checked,
+.options > .option > input[type="checkbox"]:checked ~ .on-checked {
+  opacity: 1;
+  box-shadow: inset 0px 0px 3em -1.2em rgba(0, 0, 0, 0.5);
+}
+.options > .option > input[type="radio"]:active ~ .option-content,
+.options > .option > input[type="checkbox"]:active ~ .option-content {
+  -webkit-transform: scale(1.15, 1.15);
+          transform: scale(1.15, 1.15);
+}
+.options > .option > .option-content {
+  position: relative;
+  z-index: 1;
+  cursor: pointer !important;
+  height: inherit;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+  transition-property: background, padding, -webkit-transform, -webkit-transform;
+  transition-property: transform, background, padding, transform;
+  transition-property: transform, background, padding, transform, -webkit-transform, -webkit-transform;
+  transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+  transition-duration: .3s;
+}
+.options > .option > .on-checked {
+  position: absolute;
+  z-index: 0;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 1;
+  pointer-events: none;
+  transition-property: opacity;
+  transition-duration: .5s;
+  background-color: rgba(0, 0, 0, 0.1);
+}
