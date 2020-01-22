@@ -12,11 +12,9 @@ class Home extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-        inicio: false,
-        comecar: false,
-        opcoes: false,
-        carrinho: '',
-        os: false,
+        slide: 0,
+        carro: null,
+        servico: '',
         cliente: {
           nome: 'Marcos Marques',
           cpf: '08812592929',
@@ -30,11 +28,14 @@ class Home extends React.Component {
     this.handleClick = this.handleClick.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handlePicking = this.handlePicking.bind(this);
-    this.gerarOs = this.gerarOs.bind(this);
+    this.handlePickingCar = this.handlePickingCar.bind(this);
+    this.passar = this.passar.bind(this);
+    this.escolherservico = this.escolherservico.bind(this);
   }
 
   handleChange(event) {
     this.setState({cliente: {cpf: event.target.value}});
+    console.log(this.state);
   }
 
   handleKmChange(event) {
@@ -42,27 +43,37 @@ class Home extends React.Component {
   }
 
   handleClick(event) {
-    this.setState({comecar: true, inicio: false});
+    this.setState({slide: 1});
   }
 
   handleSubmit(event) {
-    this.setState({comecar: false, opcoes : true});
+    this.setState({slide: 2});
+    console.log(this.state);
   }
 
   handlePicking(id, event) {
-    this.setState({carrinho: id});
-    console.log(this.state.carrinho);
+    this.setState({servico: id});
+    console.log(this.state.servico);
   }
 
-  gerarOs(event){
-    this.setState({os: true, opcoes: false});
+  handlePickingCar(id, event) {
+    this.setState({carro: id});
+  }
+
+  passar(n, event){
+    this.setState({slide: n});
+    console.log(this.state);
+  }
+
+  escolherservico(event){
+    this.setState({slide: 3});
   }
 
   getCpf(){
     return (
       <div className="GetCpf">
           <h1 className="label">
-            Qual é o seu cpf - {this.state.cliente.cpf}
+            Qual é o seu cpf
           </h1>
           <form onSubmit={this.handleSubmit}>
             <input className="cpf" type="number" name="cpf" value={this.state.cliente.cpf} onChange={this.handleChange}/>
@@ -83,7 +94,8 @@ class Home extends React.Component {
           </h1>
           {this.Opcoes()}
           <div>
-            <button className="botao" value="Prosseguir" onClick={this.gerarOs}>Prosseguir</button>
+            <button className="botao" value="Voltar" onClick={() => {this.setState({slide: 2})}}>Voltar</button>
+            <button className="botao" value="Prosseguir" onClick={() => {this.setState({slide: 4})}}>Prosseguir</button>
           </div>
       </div>
     )
@@ -101,7 +113,8 @@ class Home extends React.Component {
           </h1>
           {this.Carros()}
           <div>
-            <button className="botao" value="Prosseguir" onClick={this.gerarOs}>Prosseguir</button>
+            <button className="botao" value="Voltar" onClick={() => {this.setState({slide: 1})}}>Voltar</button>
+            <button className="botao" value="Prosseguir" onClick={() => {this.setState({slide: 3})}}>Prosseguir</button>
           </div>
       </div>
     )
@@ -113,7 +126,7 @@ class Home extends React.Component {
   Opcoes() {
     return(
       <div className="options">
-        <label className="option" onClick={(e) => this.handlePicking("1", e)}>
+        <label className="option" onClick={(e) => this.handlePicking("1ª Revisão", e)}>
 
               <div className="option-content">
                   <img src={revisao} className="icone" alt="logo" />
@@ -127,13 +140,13 @@ class Home extends React.Component {
                   <li><small>(10 mil km)</small></li>
                   </ul>
               </div>
-              { this.state.carrinho == "1" &&
+              { this.state.servico == "1ª Revisão" &&
               <div className="on-checked"></div>
               }
 
         </label>
 
-        <label className="option" onClick={(e) => this.handlePicking("2", e)}>
+        <label className="option" onClick={(e) => this.handlePicking("2ª Revisão", e)}>
             <div className="option-content">
             <img src={revisao} className="icone" alt="logo" />
               <h2>2ª Revisão</h2>
@@ -146,12 +159,12 @@ class Home extends React.Component {
               <li><small>(20 mil km)</small></li>
               </ul>
             </div>
-            { this.state.carrinho == "2" &&
+            { this.state.servico == "2ª Revisão" &&
             <div className="on-checked"></div>
             }
         </label>
 
-        <label className="option" onClick={(e) => this.handlePicking("3", e)}>
+        <label className="option" onClick={(e) => this.handlePicking("3ª Revisão", e)}>
             <div className="option-content">
             <img src={revisao} className="icone" alt="logo" />
               <h2>3ª Revisão</h2>
@@ -167,12 +180,12 @@ class Home extends React.Component {
               <li><small>(30 mil km)</small></li>
               </ul>
             </div>
-            { this.state.carrinho == "3" &&
+            { this.state.servico == "3ª Revisão" &&
             <div className="on-checked"></div>
             }
         </label>
 
-        <label className="option" onClick={(e) => this.handlePicking("4", e)}>
+        <label className="option" onClick={(e) => this.handlePicking("Troca de óleo", e)}>
             <div className="option-content">
               <img src={oil} className="icone" alt="logo" />
               <h2>Troca de óleo</h2>
@@ -182,7 +195,7 @@ class Home extends React.Component {
               </li>
               </ul>
             </div>
-            { this.state.carrinho == "4" &&
+            { this.state.servico == "Troca de óleo" &&
             <div className="on-checked"></div>
             }
         </label>
@@ -194,37 +207,37 @@ class Home extends React.Component {
   Carros() {
     return(
       <div className="options carros">
-        <label className="option" onClick={(e) => this.handlePicking("1", e)}>
+        <label className="option" onClick={(e) => this.handlePickingCar("Up", e)}>
 
               <div className="option-content">
                   <img src={up} className="" alt="logo" />
                   <h2>UP</h2>
 
               </div>
-              { this.state.carrinho == "1" &&
+              { this.state.carro == "Up" &&
               <div className="on-checked"></div>
               }
 
         </label>
 
-        <label className="option" onClick={(e) => this.handlePicking("2", e)}>
+        <label className="option" onClick={(e) => this.handlePickingCar("Gol", e)}>
             <div className="option-content">
             <img src={gol} className="" alt="logo" />
               <h2>Gol</h2>
 
             </div>
-            { this.state.carrinho == "2" &&
+            { this.state.carro == "Gol" &&
             <div className="on-checked"></div>
             }
         </label>
 
-        <label className="option" onClick={(e) => this.handlePicking("3", e)}>
+        <label className="option" onClick={(e) => this.handlePickingCar("Polo", e)}>
             <div className="option-content">
             <img src={polo} className="" alt="logo" />
               <h2>Polo</h2>
-              
+
             </div>
-            { this.state.carrinho == "3" &&
+            { this.state.carro == "Polo" &&
             <div className="on-checked"></div>
             }
         </label>
@@ -238,13 +251,13 @@ class Home extends React.Component {
     return (
       <div>
         <img src={logo} className="App-logo" alt="logo" />
-        <div class="box">
-           <div class='inner'>
-             <h1>1ª Revisão Cross Up</h1>
-             <div class='info clearfix'>
-                 <div class='wp'>Revisão<h2>1</h2></div>
-                 <div class='wp'>COR<h2>Bra</h2></div>
-                 <div class='wp'>Desc<h2>5%</h2></div>
+        <div className="box">
+           <div className='inner'>
+             <h1>{this.state.servico} {this.state.carro}</h1>
+             <div className='info clearfix'>
+                 <div className='wp'>Serviço<h2>{this.state.servico}</h2></div>
+                 <div className='wp'>Técnico Mec.<h2>Marcos</h2></div>
+                 <div className='wp'>Desc<h2>5%</h2></div>
              </div>
              <ul>
              <li>Troca de óleo</li>
@@ -254,14 +267,14 @@ class Home extends React.Component {
              <li>Velas</li>
              <li><small>(10 mil km)</small></li>
              </ul>
-             <div class='total clearfix'>
+             <div className='total clearfix'>
                  <h2>Total : <p>R$ 690,00</p></h2>
              </div>
            </div>
          </div>
          <small className="note">Deseja receber o comprovante por e-mail?</small>
          <div>
-           <button className="botao" value="Finalizar" onClick={() => {this.setState({inicio: true, os: false})}}>Finalizar</button>
+           <button className="botao" value="Finalizar" onClick={() => {this.setState({slide: 0})}}>Finalizar</button>
          </div>
        </div>
     )
@@ -271,8 +284,8 @@ class Home extends React.Component {
     return (
       <div className="App">
         <header className="App-header">
-          {this.getCarros()}
-          { this.state.inicio &&
+
+          { this.state.slide == 0 &&
           <div>
             <img src={logo} className="App-logo" alt="logo" />
             <h1 className="touch" onClick={this.handleClick}>
@@ -280,13 +293,16 @@ class Home extends React.Component {
             </h1>
           </div>
           }
-          { this.state.comecar &&
+          { this.state.slide == 1  &&
             this.getCpf()
           }
-          { this.state.opcoes &&
+          { this.state.slide == 2  &&
+            this.getCarros()
+          }
+          { this.state.slide == 3  &&
             this.getOpcoes()
           }
-          { this.state.os &&
+          { this.state.slide == 4  &&
             this.getOs()
           }
         </header>

@@ -116,7 +116,9 @@ li a:hover:not(.active) {
     background: none;
     border: 1px solid #ff5f6d;
     border-radius: 50px;
-    margin-top: 64px
+    margin-top: 64px;
+    margin-right: 16px;
+    margin-left: 16px;
 }
 
 @import url(https://fonts.googleapis.com/css?family=Arvo);
