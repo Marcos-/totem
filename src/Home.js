@@ -15,6 +15,7 @@ class Home extends React.Component {
         slide: 0,
         carro: null,
         servico: '',
+        tab: 1,
         cliente: {
           nome: 'Marcos Marques',
           cpf: '08812592929',
@@ -25,12 +26,8 @@ class Home extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleKmChange = this.handleKmChange.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.handlePicking = this.handlePicking.bind(this);
     this.handlePickingCar = this.handlePickingCar.bind(this);
-    this.passar = this.passar.bind(this);
-    this.escolherservico = this.escolherservico.bind(this);
   }
 
   handleChange(event) {
@@ -42,15 +39,6 @@ class Home extends React.Component {
     this.setState({cliente: {km: event.target.value}});
   }
 
-  handleClick(event) {
-    this.setState({slide: 1});
-  }
-
-  handleSubmit(event) {
-    this.setState({slide: 2});
-    console.log(this.state);
-  }
-
   handlePicking(id, event) {
     this.setState({servico: id});
     console.log(this.state.servico);
@@ -60,22 +48,13 @@ class Home extends React.Component {
     this.setState({carro: id});
   }
 
-  passar(n, event){
-    this.setState({slide: n});
-    console.log(this.state);
-  }
-
-  escolherservico(event){
-    this.setState({slide: 3});
-  }
-
   getCpf(){
     return (
       <div className="GetCpf">
           <h1 className="label">
-            Qual é o seu cpf
+            Para começar nos diga o seu <strong>CPF</strong>
           </h1>
-          <form onSubmit={this.handleSubmit}>
+          <form onSubmit={() => {this.setState({slide: 2})}}>
             <input className="cpf" type="number" name="cpf" value={this.state.cliente.cpf} onChange={this.handleChange}/>
           </form>
       </div>
@@ -255,9 +234,9 @@ class Home extends React.Component {
            <div className='inner'>
              <h1>{this.state.servico} {this.state.carro}</h1>
              <div className='info clearfix'>
-                 <div className='wp'>Serviço<h2>{this.state.servico}</h2></div>
-                 <div className='wp'>Técnico Mec.<h2>Marcos</h2></div>
-                 <div className='wp'>Desc<h2>5%</h2></div>
+                 <div className='wp'>Serviço<h2 className="h2-nota">{this.state.servico}</h2></div>
+                 <div className='wp'>Técnico Mec.<h2 className="h2-nota">Marcos</h2></div>
+                 <div className='wp'>Desc<h2 className="h2-nota">5%</h2></div>
              </div>
              <ul>
              <li>Troca de óleo</li>
@@ -274,8 +253,46 @@ class Home extends React.Component {
          </div>
          <small className="note">Deseja receber o comprovante por e-mail?</small>
          <div>
+         <button className="botao" value="Voltar" onClick={() => {this.setState({slide: 3})}}>Voltar</button>
            <button className="botao" value="Finalizar" onClick={() => {this.setState({slide: 0})}}>Finalizar</button>
          </div>
+       </div>
+    )
+  }
+
+  userForm(){
+    return (
+      <div>
+        <h2>Tabs</h2>
+        <p>Click on the x button in the top right corner to close the current tab:</p>
+
+        <div className="tab">
+        <button className="tablinks" onClick={() => {this.setState({tab: 1})}} id="defaultOpen">Minha Conta</button>
+        <button className="tablinks" onClick={() => {this.setState({tab: 2})}}>Meu Carro</button>
+        <button className="tablinks" onClick={() => {this.setState({tab: 3})}}>Histórico de serviços</button>
+        </div>
+
+        { this.state.tab == 1 &&
+        <div id="London" className="tabcontent">
+          <span onclick="this.parentElement.style.display='none'" className="topright">&times</span>
+          <h3>London</h3>
+          <p>London is the capital city of England.</p>
+        </div>
+        }
+        { this.state.tab == 2 &&
+        <div id="Paris" className="tabcontent">
+          <span onclick="this.parentElement.style.display='none'" className="topright">&times</span>
+          <h3>Paris</h3>
+          <p>Paris is the capital of France.</p>
+        </div>
+        }
+        { this.state.tab == 3 &&
+        <div id="Tokyo" className="tabcontent">
+          <span onclick="this.parentElement.style.display='none'" className="topright">&times</span>
+          <h3>Tokyo</h3>
+          <p>Tokyo is the capital of Japan.</p>
+        </div>
+        }
        </div>
     )
   }
@@ -285,10 +302,15 @@ class Home extends React.Component {
       <div className="App">
         <header className="App-header">
 
+          { this.state.slide > 1 &&
+            <div className="conta" onClick={() => {console.log(this.setState({slide: 99}))}}>
+              &#9881;
+            </div>
+          }
           { this.state.slide == 0 &&
           <div>
             <img src={logo} className="App-logo" alt="logo" />
-            <h1 className="touch" onClick={this.handleClick}>
+            <h1 className="touch" onClick={() => {this.setState({slide: 1})}}>
               Toque para começar!
             </h1>
           </div>
@@ -304,6 +326,9 @@ class Home extends React.Component {
           }
           { this.state.slide == 4  &&
             this.getOs()
+          }
+          { this.state.slide == 99  &&
+            this.userForm()
           }
         </header>
       </div>

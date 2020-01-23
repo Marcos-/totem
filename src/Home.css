@@ -11,13 +11,13 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .GetCpf {
-    animation: touch-glow 1s;
+    animation: fadein 1s;
   }
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .GetOpcoes {
-    animation: touch-glow 1s;
+    animation: fadein 1s;
   }
 }
 
@@ -40,7 +40,7 @@
   color: var(--Lightgray);
 }
 
-@keyframes touch-glow {
+@keyframes fadein {
   from {
     opacity: 0;
   }
@@ -121,6 +121,14 @@ li a:hover:not(.active) {
     margin-left: 16px;
 }
 
+.conta{
+    position: absolute;
+    top: 32px;
+    right: 32px;
+    transform: scale(2, 2);
+    cursor: pointer;
+}
+
 @import url(https://fonts.googleapis.com/css?family=Arvo);
 
     .box{
@@ -175,7 +183,14 @@ li a:hover:not(.active) {
     }
     .info .wp h2{
         margin: 8px;
+        font-style: bold;
     }
+
+    .info .wp .h2-nota{
+        font-size: 11px;
+        font-style: normal;
+    }
+
     .total{
         border-top: 1px solid rgba(51, 51, 51, 0.3);
     }
