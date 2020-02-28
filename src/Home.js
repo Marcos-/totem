@@ -5,6 +5,7 @@ import oil from './maintenance.png';
 import gol from './gol.png';
 import up from './up.png';
 import polo from './polo.png';
+import lavagem from './lavagem.png';
 import './Home.css';
 
 class Home extends React.Component {
@@ -14,20 +15,32 @@ class Home extends React.Component {
     this.state = {
         slide: 0,
         carro: null,
-        servico: '',
+        km: 0,
+        servico: "",
+        maodeobra: 0,
+        pecas: 0,
         tab: 1,
+        lavagem: true,
+        total: 0,
         cliente: {
           nome: 'Marcos Marques',
           cpf: '08812592929',
-          carro: '',
-          km: 0
         }
       };
+
+    // this.opcionais = [
+    //   "Aditivo Tanque", "Correia", "Elemento", "Espuma Limpad", "Estopa", "Filtro Compressor", "Filtro",
+    //   "Filtro Oleo", "Higienizador de AC", "JG Peças", "Kit lubrificante F.K", "Oleo 508 5W40", "Parafuso",
+    //   "Rolo", "Trava", "Alinhamento e balanceamento", "Correia Dentada. Remov+Inst", "Higienização Americana",
+    //   "Troca de óleo"
+    // ]
 
     this.handleChange = this.handleChange.bind(this);
     this.handleKmChange = this.handleKmChange.bind(this);
     this.handlePicking = this.handlePicking.bind(this);
     this.handlePickingCar = this.handlePickingCar.bind(this);
+    this.handleCheckOpt = this.handleCheckOpt.bind(this);
+
   }
 
   handleChange(event) {
@@ -46,6 +59,32 @@ class Home extends React.Component {
 
   handlePickingCar(id, event) {
     this.setState({carro: id});
+  }
+
+  handleCheckOpt(event){
+    this.setState({lavagem: !this.state.lavagem})
+  }
+
+  calcularTotal(){
+    var subtotal = 0;
+    if (this.state.servico == "1ª Revisão"){
+      subtotal += 690;
+    }else
+    if (this.state.servico == "2ª Revisão"){
+      subtotal += 890;
+    }else
+    if (this.state.servico == "3ª Revisão"){
+      subtotal += 690;
+    }else
+    if (this.state.servico == "Troca de óleo"){
+      subtotal += 190;
+    }
+    if (this.state.lavagem == true){
+      subtotal += 170;
+    }else{
+      subtotal -= 170;
+    }
+    this.setState({total: subtotal, slide: 5})
   }
 
   getCpf(){
@@ -240,23 +279,54 @@ class Home extends React.Component {
              </div>
              <ul>
              <li>Troca de óleo</li>
-             <li>Filtro de óleo</li>
-             <li>Alinhamento e balanceamento</li>
-             <li>Ar condicionado</li>
-             <li>Velas</li>
-             <li><small>(10 mil km)</small></li>
+             {
+               this.state.servico != "Troca de óleo" &&
+               [<li>Filtro de óleo</li>,
+               <li>Alinhamento e balanceamento</li>,
+               <li>Ar condicionado</li>,
+               <li>Velas</li>,
+               <li><small>({this.state.km} mil km)</small></li>]
+             }
+             {
+               this.state.lavagem &&
+               <li>+ Higienização Americana</li>
+             }
              </ul>
              <div className='total clearfix'>
-                 <h2>Total : <p>R$ 690,00</p></h2>
+                 <h2>Total : <p>R$ {this.state.total},00</p></h2>
              </div>
            </div>
          </div>
          <small className="note">Deseja receber o comprovante por e-mail?</small>
          <div>
-         <button className="botao" value="Voltar" onClick={() => {this.setState({slide: 3})}}>Voltar</button>
+         <button className="botao" value="Voltar" onClick={() => {this.setState({slide: 4})}}>Voltar</button>
            <button className="botao" value="Finalizar" onClick={() => {this.setState({slide: 0})}}>Finalizar</button>
          </div>
        </div>
+    )
+  }
+
+  getOpcionais(){
+    return (
+      <div>
+        <h1 className="label">
+          Adicionar Higienização Americana?
+        </h1>
+        <div className="addOn">
+          <img src={lavagem} className="lavagem" alt="lavagem" />
+        </div>
+        <div className="addOn-checkbox">
+          <small>De R$ <span>199,00</span> por R$ 179,00 ao adicionar no carrinho agora.</small>
+          <div className="opcional">
+            <input type="checkbox" id="1" name="lavagem" value="lavagem" defaultChecked={this.state.lavagem} onChange={this.handleCheckOpt}/>
+            <label for="1">Adicionar ao carrinho</label>
+          </div>
+        </div>
+        <div>
+          <button className="botao" value="Voltar" onClick={() => {this.setState({slide: 3})}}>Voltar</button>
+          <button className="botao" value="Proximo" onClick={() => {this.calcularTotal()}}>Proximo</button>
+        </div>
+      </div>
     )
   }
 
@@ -273,24 +343,21 @@ class Home extends React.Component {
         </div>
 
         { this.state.tab == 1 &&
-        <div id="London" className="tabcontent">
-          <span onclick="this.parentElement.style.display='none'" className="topright">&times</span>
-          <h3>London</h3>
-          <p>London is the capital city of England.</p>
+        <div id="MinhaConta" className="tabcontent">
+          <h3>{this.state.cliente.nome}</h3>
+          <p>{this.state.cliente.cpf}</p>
+          <p>{this.state.carro}</p>
         </div>
         }
         { this.state.tab == 2 &&
-        <div id="Paris" className="tabcontent">
-          <span onclick="this.parentElement.style.display='none'" className="topright">&times</span>
-          <h3>Paris</h3>
-          <p>Paris is the capital of France.</p>
+        <div id="MeuCarro" className="tabcontent">
+          <h3>{this.state.carro}</h3>
+          <p>{this.state.km} km</p>
         </div>
         }
         { this.state.tab == 3 &&
-        <div id="Tokyo" className="tabcontent">
-          <span onclick="this.parentElement.style.display='none'" className="topright">&times</span>
-          <h3>Tokyo</h3>
-          <p>Tokyo is the capital of Japan.</p>
+        <div id="Servicos" className="tabcontent">
+          <p>1ª revisão</p>
         </div>
         }
        </div>
@@ -302,8 +369,8 @@ class Home extends React.Component {
       <div className="App">
         <header className="App-header">
 
-          { this.state.slide > 1 &&
-            <div className="conta" onClick={() => {console.log(this.setState({slide: 99}))}}>
+          { (this.state.slide > 1 || this.state.slide < 0) &&
+            <div className="conta" onClick={() => {console.log(this.setState({slide: this.state.slide*(-1)}))}}>
               &#9881;
             </div>
           }
@@ -325,9 +392,12 @@ class Home extends React.Component {
             this.getOpcoes()
           }
           { this.state.slide == 4  &&
+            this.getOpcionais()
+          }
+          { this.state.slide == 5  &&
             this.getOs()
           }
-          { this.state.slide == 99  &&
+          { this.state.slide < 0  &&
             this.userForm()
           }
         </header>
@@ -337,3 +407,20 @@ class Home extends React.Component {
 }
 
 export default Home;
+
+// <div className="opcionais">
+//   {
+//     this.opcionais.map(function(name, index){
+//               console.log(name);
+//               return <div className="opcional">
+//                       <input type="checkbox" id={index} name={name} value={name}/>
+//                       <label for={index}> {name}</label>
+//                     </div>;
+//     })
+//   }
+// </div>
+
+
+// <small>
+//   Lavagem da parte externa e da caixa de rodas, limpeza do painel, de vidros e carpete, aspiração interna e pretinho dos pneus. Dê brilho à lataria com cera líquida ou Jet Brite e polimento cristalizado, que busca
+// </small>

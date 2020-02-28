@@ -8,7 +8,6 @@
   text-align: center;
 }
 
-
 @media (prefers-reduced-motion: no-preference) {
   .GetCpf {
     animation: fadein 1s;
@@ -37,7 +36,7 @@
 }
 
 .label{
-  color: var(--Lightgray);
+  color: var(--Darkgray);
 }
 
 @keyframes fadein {
@@ -397,4 +396,72 @@ label.option:visited {
   transition-property: opacity;
   transition-duration: .5s;
   background-color: rgba(0, 0, 0, 0.1);
+}
+
+.tabcontent {
+  color: var(--Darkgray);
+}
+
+.opcionais {
+    display: flex;
+    flex-grow: inherit;
+    flex-flow: wrap;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 70%;
+    margin: auto;
+}
+
+.opcional input{
+  -webkit-appearance:none;
+    width:30px;
+    height:30px;
+    background:white;
+    border-radius:5px;
+    border:2px solid var(--Darkgray);
+}
+
+.opcional input:checked {
+    background: #ff5f6d;
+}
+
+.opcional {
+  /* margin-right: 32px; */
+  min-width: 250px;
+  /* position: absolute; */
+  bottom: -50px;
+  /* float: right; */
+}
+
+.opcional label {
+    position: relative;
+    bottom: 8px;
+    color: var(--Darkgray);
+}
+
+.addOn {
+  display: flex;
+    width: 90%;
+    margin: auto;
+    /* flex-grow: initial; */
+    flex-direction: row;
+    flex-basis: 1;
+}
+
+.lavagem {
+  width: 100%;
+}
+
+.addOn-checkbox {
+  color: var(--Darkgray);
+  width: 90%;
+  margin: 32px auto;
+}
+
+.addOn-checkbox small{
+  float: left;
+}
+
+.addOn-checkbox small span {
+  text-decoration: line-through;
 }
